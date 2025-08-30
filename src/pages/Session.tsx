@@ -143,27 +143,27 @@ export default function Session() {
       <div className="flex h-screen">
         {/* Left Touch Zone - Previous */}
         <div 
-          className="flex-[2] flex items-center justify-end pr-4 cursor-pointer select-none touch-manipulation border-r border-white/20 relative"
+          className="flex-none basis-[var(--session-rail)] flex items-center justify-end pr-4 cursor-pointer select-none touch-manipulation border-r-2 border-white/30 relative"
           onClick={() => canGoPrevious && handleZoneInteraction('left')}
           onTouchEnd={() => canGoPrevious && handleZoneInteraction('left')}
           style={{ 
-            backgroundColor: canGoPrevious ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.03)',
-            opacity: canGoPrevious ? 1 : 0.5,
+            backgroundColor: canGoPrevious ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)',
+            opacity: 1,
             WebkitTapHighlightColor: 'transparent'
           }}
         >
           {/* Touch zone label */}
-          <div className="absolute top-4 left-4 text-xs opacity-60">
-            {canGoPrevious ? 'BACK' : ''}
+          <div className="absolute top-4 left-4 text-xs opacity-80 font-medium">
+            {canGoPrevious ? 'BACK' : 'START'}
           </div>
-          <div className={`transition-opacity duration-200 p-8 ${canGoPrevious ? 'opacity-50 hover:opacity-70 active:opacity-90' : 'opacity-20'}`}>
+          <div className={`transition-opacity duration-200 p-8 ${canGoPrevious ? 'opacity-60 hover:opacity-80 active:opacity-90' : 'opacity-30'}`}>
             <ArrowLeft className="h-12 w-12" />
           </div>
         </div>
 
         {/* Center Display - Word */}
-        <div className="flex-[1] flex items-center justify-center pointer-events-none">
-          <div className="w-screen px-4 md:px-8 animate-word-enter">
+        <div className="flex-1 min-w-0 flex items-center justify-center pointer-events-none">
+          <div className="w-full px-4 md:px-8 animate-word-enter">
             <div className="grid grid-cols-2 items-baseline">
               <div className="text-right">
                 <span className="text-session-onset text-word-display md:text-word-display font-bold tracking-wider leading-none whitespace-nowrap">
@@ -181,19 +181,19 @@ export default function Session() {
 
         {/* Right Touch Zone - Next */}
         <div 
-          className="flex-[2] flex items-center justify-start pl-4 cursor-pointer select-none touch-manipulation border-l border-white/20 relative"
+          className="flex-none basis-[var(--session-rail)] flex items-center justify-start pl-4 cursor-pointer select-none touch-manipulation border-l-2 border-white/30 relative"
           onClick={() => handleZoneInteraction('right')}
           onTouchEnd={() => handleZoneInteraction('right')}
           style={{ 
-            backgroundColor: 'rgba(255,255,255,0.1)',
+            backgroundColor: 'rgba(255,255,255,0.15)',
             WebkitTapHighlightColor: 'transparent'
           }}
         >
           {/* Touch zone label */}
-          <div className="absolute top-4 right-4 text-xs opacity-60">
+          <div className="absolute top-4 right-4 text-xs opacity-80 font-medium">
             NEXT
           </div>
-          <div className="opacity-50 hover:opacity-70 active:opacity-90 transition-opacity duration-200 p-8">
+          <div className="opacity-60 hover:opacity-80 active:opacity-90 transition-opacity duration-200 p-8">
             <ArrowRight className="h-12 w-12" />
           </div>
         </div>
