@@ -140,7 +140,7 @@ export default function Complete() {
         </Card>
 
         {/* Action Buttons */}
-        <div className="grid sm:grid-cols-3 gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
             onClick={handleNewSession}
             className="bg-white text-primary hover:bg-white/90 font-semibold py-6 text-lg"
@@ -149,20 +149,20 @@ export default function Complete() {
             New Session
           </Button>
 
-          <button
+          <Button
             onClick={handleSameFamilies}
-            className="flex items-center justify-center gap-2 text-white hover:text-white/80 font-semibold py-6 text-lg underline underline-offset-4 hover:underline-offset-2 transition-all"
+            className="font-semibold py-6 text-lg"
           >
-            <RotateCcw className="h-5 w-5" />
+            <RotateCcw className="h-5 w-5 mr-2" />
             Same Families Again
-          </button>
+          </Button>
 
-          <button
+          <Button
             onClick={handleExit}
-            className="flex items-center justify-center gap-2 text-white hover:text-white/80 font-semibold py-6 text-lg underline underline-offset-4 hover:underline-offset-2 transition-all"
+            className="font-semibold py-6 text-lg"
           >
             Exit to Home
-          </button>
+          </Button>
         </div>
 
         {/* Encouraging Message */}

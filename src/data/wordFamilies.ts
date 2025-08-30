@@ -12,6 +12,22 @@ export interface WordFamily {
 }
 
 export const wordFamilies: Record<string, WordFamily> = {
+  "ad": {
+    id: "ad",
+    displayName: "-ad family",
+    rime: "ad",
+    words: [
+      { word: "bad", onset: "b", rime: "ad" },
+      { word: "dad", onset: "d", rime: "ad" },
+      { word: "had", onset: "h", rime: "ad" },
+      { word: "sad", onset: "s", rime: "ad" },
+      { word: "mad", onset: "m", rime: "ad" },
+      { word: "pad", onset: "p", rime: "ad" },
+      { word: "lad", onset: "l", rime: "ad" },
+      { word: "glad", onset: "gl", rime: "ad" },
+      { word: "rad", onset: "r", rime: "ad" }
+    ]
+  },
   "at": {
     id: "at",
     displayName: "-at family",
@@ -75,6 +91,22 @@ export const wordFamilies: Record<string, WordFamily> = {
       { word: "smog", onset: "sm", rime: "og" }
     ]
   },
+  "am": {
+    id: "am",
+    displayName: "-am family",
+    rime: "am",
+    words: [
+      { word: "ham", onset: "h", rime: "am" },
+      { word: "jam", onset: "j", rime: "am" },
+      { word: "ram", onset: "r", rime: "am" },
+      { word: "yam", onset: "y", rime: "am" },
+      { word: "cam", onset: "c", rime: "am" },
+      { word: "clam", onset: "cl", rime: "am" },
+      { word: "tram", onset: "tr", rime: "am" },
+      { word: "slam", onset: "sl", rime: "am" },
+      { word: "cram", onset: "cr", rime: "am" }
+    ]
+  },
   "ug": {
     id: "ug",
     displayName: "-ug family",
@@ -136,6 +168,22 @@ export const wordFamilies: Record<string, WordFamily> = {
       { word: "track", onset: "tr", rime: "ack" },
       { word: "crack", onset: "cr", rime: "ack" },
       { word: "black", onset: "bl", rime: "ack" }
+    ]
+  },
+  "ail": {
+    id: "ail",
+    displayName: "-ail family",
+    rime: "ail",
+    words: [
+      { word: "mail", onset: "m", rime: "ail" },
+      { word: "sail", onset: "s", rime: "ail" },
+      { word: "rail", onset: "r", rime: "ail" },
+      { word: "tail", onset: "t", rime: "ail" },
+      { word: "nail", onset: "n", rime: "ail" },
+      { word: "fail", onset: "f", rime: "ail" },
+      { word: "hail", onset: "h", rime: "ail" },
+      { word: "pail", onset: "p", rime: "ail" },
+      { word: "trail", onset: "tr", rime: "ail" }
     ]
   }
 };
