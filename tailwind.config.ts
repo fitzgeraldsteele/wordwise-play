@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -61,7 +62,25 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Word Family Teaching Colors
+				onset: {
+					DEFAULT: 'hsl(var(--onset))',
+					foreground: 'hsl(var(--onset-foreground))'
+				},
+				rime: {
+					DEFAULT: 'hsl(var(--rime))',
+					foreground: 'hsl(var(--rime-foreground))'
+				},
+				session: {
+					bg: 'hsl(var(--session-bg))',
+					text: 'hsl(var(--session-text))',
+					onset: 'hsl(var(--session-onset))',
+					progress: 'hsl(var(--session-progress))'
 				}
+			},
+			fontFamily: {
+				display: ['Inter', 'system-ui', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

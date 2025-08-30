@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Word Families Teaching App Design System */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors - Education Theme */
+    --background: 240 10% 98%;
+    --foreground: 230 15% 15%;
 
+    /* Educational Blue-Purple Gradient System */
+    --primary: 220 90% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 245 85% 68%;
+    
+    /* Secondary Education Colors */
+    --secondary: 200 25% 90%;
+    --secondary-foreground: 220 90% 56%;
+    
+    /* Word Display Colors */
+    --onset: 45 100% 60%;        /* Bright yellow for onset */
+    --onset-foreground: 230 15% 15%;
+    --rime: 0 0% 100%;           /* Pure white for rime */
+    --rime-foreground: 230 15% 15%;
+    
+    /* Session Dark Mode Colors */
+    --session-bg: 230 25% 8%;
+    --session-text: 0 0% 95%;
+    --session-onset: 50 100% 65%; /* Brighter yellow for dark bg */
+    --session-progress: 120 60% 50%;
+    
+    /* UI Components */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --card-foreground: 230 15% 15%;
+    --muted: 220 15% 96%;
+    --muted-foreground: 230 8% 46%;
+    --accent: 245 85% 68%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Interactive States */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 88%;
+    --input: 220 15% 95%;
+    --ring: 220 90% 56%;
+    
+    /* Beautiful Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 90% 56%), hsl(245 85% 68%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 15% 98%));
+    --gradient-session: linear-gradient(180deg, hsl(230 25% 8%), hsl(230 30% 12%));
+    --gradient-progress: linear-gradient(90deg, hsl(220 90% 56%), hsl(245 85% 68%), hsl(120 60% 50%));
+    
+    /* Shadows & Effects */
+    --shadow-card: 0 4px 20px -2px hsl(220 90% 56% / 0.1);
+    --shadow-glow: 0 0 30px hsl(245 85% 68% / 0.3);
+    --shadow-session: 0 8px 40px -8px hsl(0 0% 0% / 0.4);
+    
+    /* Typography */
+    --font-display: 'Inter', system-ui, sans-serif;
+    --tracking-display: 0.05em;
+    
+    /* Layout */
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +125,94 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-display;
+  }
+}
+
+@layer components {
+  /* Hero Gradient Backgrounds */
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .bg-gradient-session {
+    background: var(--gradient-session);
+  }
+  
+  .bg-gradient-progress {
+    background: var(--gradient-progress);
+  }
+  
+  /* Word Display Typography */
+  .text-word-display {
+    font-size: clamp(4rem, 15vw, 20rem);
+    font-weight: 700;
+    letter-spacing: var(--tracking-display);
+    line-height: 0.9;
+  }
+  
+  .text-word-display-mobile {
+    font-size: clamp(3rem, 20vw, 12rem);
+  }
+  
+  /* Onset/Rime Colors */
+  .text-onset {
+    color: hsl(var(--onset));
+  }
+  
+  .text-rime {
+    color: hsl(var(--rime));
+  }
+  
+  .text-session-onset {
+    color: hsl(var(--session-onset));
+  }
+  
+  .text-session-text {
+    color: hsl(var(--session-text));
+  }
+  
+  /* Touch Targets */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Card Shadows */
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-session {
+    box-shadow: var(--shadow-session);
+  }
+  
+  /* Session Background */
+  .bg-session {
+    background: hsl(var(--session-bg));
+  }
+  
+  /* Animations */
+  .animate-word-enter {
+    animation: wordEnter 0.3s ease-out;
+  }
+  
+  @keyframes wordEnter {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 }

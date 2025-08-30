@@ -1,0 +1,127 @@
+export interface WordData {
+  word: string;
+  onset: string;
+  rime: string;
+}
+
+export interface WordFamily {
+  id: string;
+  displayName: string;
+  rime: string;
+  words: WordData[];
+}
+
+export const wordFamilies: Record<string, WordFamily> = {
+  "at": {
+    id: "at",
+    displayName: "-at family",
+    rime: "at",
+    words: [
+      { word: "cat", onset: "c", rime: "at" },
+      { word: "bat", onset: "b", rime: "at" },
+      { word: "hat", onset: "h", rime: "at" },
+      { word: "sat", onset: "s", rime: "at" },
+      { word: "mat", onset: "m", rime: "at" },
+      { word: "rat", onset: "r", rime: "at" },
+      { word: "fat", onset: "f", rime: "at" },
+      { word: "flat", onset: "fl", rime: "at" },
+      { word: "chat", onset: "ch", rime: "at" }
+    ]
+  },
+  "an": {
+    id: "an",
+    displayName: "-an family",
+    rime: "an",
+    words: [
+      { word: "man", onset: "m", rime: "an" },
+      { word: "pan", onset: "p", rime: "an" },
+      { word: "can", onset: "c", rime: "an" },
+      { word: "ran", onset: "r", rime: "an" },
+      { word: "fan", onset: "f", rime: "an" },
+      { word: "tan", onset: "t", rime: "an" },
+      { word: "plan", onset: "pl", rime: "an" },
+      { word: "scan", onset: "sc", rime: "an" },
+      { word: "than", onset: "th", rime: "an" }
+    ]
+  },
+  "in": {
+    id: "in",
+    displayName: "-in family",
+    rime: "in",
+    words: [
+      { word: "bin", onset: "b", rime: "in" },
+      { word: "fin", onset: "f", rime: "in" },
+      { word: "pin", onset: "p", rime: "in" },
+      { word: "win", onset: "w", rime: "in" },
+      { word: "tin", onset: "t", rime: "in" },
+      { word: "chin", onset: "ch", rime: "in" },
+      { word: "spin", onset: "sp", rime: "in" },
+      { word: "twin", onset: "tw", rime: "in" },
+      { word: "thin", onset: "th", rime: "in" }
+    ]
+  },
+  "og": {
+    id: "og",
+    displayName: "-og family",
+    rime: "og",
+    words: [
+      { word: "dog", onset: "d", rime: "og" },
+      { word: "log", onset: "l", rime: "og" },
+      { word: "fog", onset: "f", rime: "og" },
+      { word: "hog", onset: "h", rime: "og" },
+      { word: "jog", onset: "j", rime: "og" },
+      { word: "clog", onset: "cl", rime: "og" },
+      { word: "frog", onset: "fr", rime: "og" },
+      { word: "smog", onset: "sm", rime: "og" }
+    ]
+  },
+  "ug": {
+    id: "ug",
+    displayName: "-ug family",
+    rime: "ug",
+    words: [
+      { word: "bug", onset: "b", rime: "ug" },
+      { word: "hug", onset: "h", rime: "ug" },
+      { word: "mug", onset: "m", rime: "ug" },
+      { word: "rug", onset: "r", rime: "ug" },
+      { word: "jug", onset: "j", rime: "ug" },
+      { word: "drug", onset: "dr", rime: "ug" },
+      { word: "plug", onset: "pl", rime: "ug" },
+      { word: "snug", onset: "sn", rime: "ug" }
+    ]
+  },
+  "op": {
+    id: "op",
+    displayName: "-op family",
+    rime: "op",
+    words: [
+      { word: "hop", onset: "h", rime: "op" },
+      { word: "pop", onset: "p", rime: "op" },
+      { word: "top", onset: "t", rime: "op" },
+      { word: "mop", onset: "m", rime: "op" },
+      { word: "cop", onset: "c", rime: "op" },
+      { word: "chop", onset: "ch", rime: "op" },
+      { word: "drop", onset: "dr", rime: "op" },
+      { word: "stop", onset: "st", rime: "op" },
+      { word: "shop", onset: "sh", rime: "op" }
+    ]
+  }
+};
+
+export const wordFamilyList = Object.values(wordFamilies);
+
+// Utility functions
+export function shuffleWords(words: WordData[]): WordData[] {
+  const shuffled = [...words];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+export function getTotalWordsCount(familyIds: string[]): number {
+  return familyIds.reduce((total, id) => {
+    return total + (wordFamilies[id]?.words.length || 0);
+  }, 0);
+}
