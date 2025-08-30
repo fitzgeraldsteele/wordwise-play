@@ -149,22 +149,20 @@ export default function Complete() {
             New Session
           </Button>
 
-          <Button
+          <button
             onClick={handleSameFamilies}
-            variant="outline"
-            className="border-white text-white hover:bg-white/10 font-semibold py-6 text-lg"
+            className="flex items-center justify-center gap-2 text-white hover:text-white/80 font-semibold py-6 text-lg underline underline-offset-4 hover:underline-offset-2 transition-all"
           >
-            <RotateCcw className="h-5 w-5 mr-2" />
+            <RotateCcw className="h-5 w-5" />
             Same Families Again
-          </Button>
+          </button>
 
-          <Button
+          <button
             onClick={handleExit}
-            variant="ghost"
-            className="text-white hover:bg-white/10 font-semibold py-6 text-lg"
+            className="flex items-center justify-center gap-2 text-white hover:text-white/80 font-semibold py-6 text-lg underline underline-offset-4 hover:underline-offset-2 transition-all"
           >
             Exit to Home
-          </Button>
+          </button>
         </div>
 
         {/* Encouraging Message */}
