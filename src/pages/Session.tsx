@@ -146,9 +146,9 @@ export default function Session() {
 
         {/* Center Display - Word */}
         <div className="flex-[1] flex items-center justify-center pointer-events-none">
-          <div className="text-center animate-word-enter">
-            <div className="text-word-display md:text-word-display font-bold tracking-wider leading-none">
-              <span className="text-session-onset">
+          <div className="animate-word-enter">
+            <div className="text-word-display md:text-word-display font-bold tracking-wider leading-none flex items-baseline">
+              <span className="text-session-onset text-right">
                 {currentWord.onset}
               </span>
               <span className="text-session-text">
