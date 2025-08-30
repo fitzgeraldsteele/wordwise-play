@@ -13,30 +13,23 @@ export default function Complete() {
   const { state, dispatch } = useSession();
   const [sessionDuration, setSessionDuration] = useState<string>('');
 
-  // Mock data for development testing
-  const mockState = {
-    selectedFamilies: ['ight', 'ack'],
-    wordsViewed: 9,
-    startTime: new Date(Date.now() - 8000) // 8 seconds ago
-  };
-
   // Calculate session stats
   useEffect(() => {
-    if (mockState.startTime) {
+    if (state.startTime) {
       const endTime = new Date();
-      const duration = Math.floor((endTime.getTime() - mockState.startTime.getTime()) / 1000);
+      const duration = Math.floor((endTime.getTime() - state.startTime.getTime()) / 1000);
       const minutes = Math.floor(duration / 60);
       const seconds = duration % 60;
       setSessionDuration(`${minutes}:${seconds.toString().padStart(2, '0')}`);
     }
-  }, [mockState.startTime]);
+  }, [state.startTime]);
 
-  // Redirect if no completed session - COMMENTED OUT FOR TESTING
-  // useEffect(() => {
-  //   if (state.selectedFamilies.length === 0 || state.wordsViewed === 0) {
-  //     navigate('/');
-  //   }
-  // }, [state.selectedFamilies.length, state.wordsViewed, navigate]);
+  // Redirect if no completed session
+  useEffect(() => {
+    if (state.selectedFamilies.length === 0 || state.wordsViewed === 0) {
+      navigate('/');
+    }
+  }, [state.selectedFamilies.length, state.wordsViewed, navigate]);
 
   const handleNewSession = () => {
     dispatch({ type: 'RESET_SESSION' });
@@ -45,7 +38,7 @@ export default function Complete() {
 
   const handleSameFamilies = () => {
     // Keep same families but reshuffle and restart
-    dispatch({ type: 'SET_FAMILIES', families: mockState.selectedFamilies });
+    dispatch({ type: 'SET_FAMILIES', families: state.selectedFamilies });
     dispatch({ type: 'START_SESSION' });
     navigate('/session');
   };
@@ -55,8 +48,8 @@ export default function Complete() {
     navigate('/');
   };
 
-  const totalWords = getTotalWordsCount(mockState.selectedFamilies);
-  const familiesCompleted = mockState.selectedFamilies.length;
+  const totalWords = getTotalWordsCount(state.selectedFamilies);
+  const familiesCompleted = state.selectedFamilies.length;
 
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 pb-16">
@@ -87,7 +80,7 @@ export default function Complete() {
               <div className="bg-white/10 rounded-lg p-6">
                 <BookOpen className="h-8 w-8 text-white mx-auto mb-3" />
                 <div className="text-3xl font-bold text-white mb-2">
-                  {mockState.wordsViewed}
+                  {state.wordsViewed}
                 </div>
                 <div className="text-sm text-white/80">
                   Words Reviewed
@@ -128,7 +121,7 @@ export default function Complete() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-3">
-              {mockState.selectedFamilies.map((familyId) => {
+              {state.selectedFamilies.map((familyId) => {
                 const family = wordFamilies[familyId];
                 if (!family) return null;
                 
@@ -156,22 +149,20 @@ export default function Complete() {
             New Session
           </Button>
 
-          <Button
+          <button
             onClick={handleSameFamilies}
-            variant="outline"
-            className="border-white text-white hover:bg-white/10 font-semibold py-6 text-lg"
+            className="flex items-center justify-center gap-2 text-white hover:text-white/80 font-semibold py-6 text-lg underline underline-offset-4 hover:underline-offset-2 transition-all"
           >
-            <RotateCcw className="h-5 w-5 mr-2" />
+            <RotateCcw className="h-5 w-5" />
             Same Families Again
-          </Button>
+          </button>
 
-          <Button
+          <button
             onClick={handleExit}
-            variant="ghost"
-            className="text-white hover:bg-white/10 font-semibold py-6 text-lg"
+            className="flex items-center justify-center gap-2 text-white hover:text-white/80 font-semibold py-6 text-lg underline underline-offset-4 hover:underline-offset-2 transition-all"
           >
             Exit to Home
-          </Button>
+          </button>
         </div>
 
         {/* Encouraging Message */}
