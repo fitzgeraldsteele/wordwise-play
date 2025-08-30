@@ -105,6 +105,38 @@ export const wordFamilies: Record<string, WordFamily> = {
       { word: "stop", onset: "st", rime: "op" },
       { word: "shop", onset: "sh", rime: "op" }
     ]
+  },
+  "ight": {
+    id: "ight",
+    displayName: "-ight family",
+    rime: "ight",
+    words: [
+      { word: "light", onset: "l", rime: "ight" },
+      { word: "sight", onset: "s", rime: "ight" },
+      { word: "right", onset: "r", rime: "ight" },
+      { word: "night", onset: "n", rime: "ight" },
+      { word: "fight", onset: "f", rime: "ight" },
+      { word: "might", onset: "m", rime: "ight" },
+      { word: "tight", onset: "t", rime: "ight" },
+      { word: "bright", onset: "br", rime: "ight" },
+      { word: "flight", onset: "fl", rime: "ight" }
+    ]
+  },
+  "ack": {
+    id: "ack",
+    displayName: "-ack family",
+    rime: "ack",
+    words: [
+      { word: "back", onset: "b", rime: "ack" },
+      { word: "pack", onset: "p", rime: "ack" },
+      { word: "sack", onset: "s", rime: "ack" },
+      { word: "rack", onset: "r", rime: "ack" },
+      { word: "jack", onset: "j", rime: "ack" },
+      { word: "lack", onset: "l", rime: "ack" },
+      { word: "track", onset: "tr", rime: "ack" },
+      { word: "crack", onset: "cr", rime: "ack" },
+      { word: "black", onset: "bl", rime: "ack" }
+    ]
   }
 };
 
