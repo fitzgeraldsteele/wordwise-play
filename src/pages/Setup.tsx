@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { wordFamilyList } from '../data/wordFamilies';
 import { useSession } from '../contexts/SessionContext';
+import Footer from '@/components/Footer';
 
 export default function Setup() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function Setup() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8 pb-16">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8 text-center">
@@ -146,6 +147,8 @@ export default function Setup() {
           </Button>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }

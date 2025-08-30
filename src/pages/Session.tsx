@@ -64,11 +64,17 @@ export default function Session() {
 
   // Touch navigation zones
   const handleTouchZone = (zone: 'left' | 'right') => {
-    if (zone === 'left') {
+    console.log(`Touch zone activated: ${zone}`); // Debug log
+    if (zone === 'left' && canGoPrevious) {
       handlePrevious();
     } else if (zone === 'right') {
       handleNext();
     }
+  };
+
+  // Simplified touch and click handling
+  const handleZoneInteraction = (zone: 'left' | 'right') => {
+    handleTouchZone(zone);
   };
 
   if (!currentWord) {
@@ -118,6 +124,13 @@ export default function Session() {
         </div>
       </div>
 
+      {/* Mobile Touch Instructions */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 md:hidden">
+        <div className="text-xs opacity-70 text-center">
+          Tap left to go back • Tap right to advance
+        </div>
+      </div>
+
       {/* Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
         <div 
@@ -130,18 +143,22 @@ export default function Session() {
       <div className="flex h-screen">
         {/* Left Touch Zone - Previous */}
         <div 
-          className="flex-[2] flex items-center justify-end pr-4 cursor-pointer select-none"
-          onClick={() => canGoPrevious && handleTouchZone('left')}
+          className="flex-[2] flex items-center justify-end pr-4 cursor-pointer select-none touch-manipulation border-r border-white/20 relative"
+          onClick={() => canGoPrevious && handleZoneInteraction('left')}
+          onTouchEnd={() => canGoPrevious && handleZoneInteraction('left')}
           style={{ 
-            backgroundColor: 'transparent',
-            opacity: canGoPrevious ? 1 : 0.5 
+            backgroundColor: canGoPrevious ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.03)',
+            opacity: canGoPrevious ? 1 : 0.5,
+            WebkitTapHighlightColor: 'transparent'
           }}
         >
-          {canGoPrevious && (
-            <div className="opacity-0 hover:opacity-30 transition-opacity duration-200 p-8">
-              <ArrowLeft className="h-12 w-12" />
-            </div>
-          )}
+          {/* Touch zone label */}
+          <div className="absolute top-4 left-4 text-xs opacity-60">
+            {canGoPrevious ? 'BACK' : ''}
+          </div>
+          <div className={`transition-opacity duration-200 p-8 ${canGoPrevious ? 'opacity-50 hover:opacity-70 active:opacity-90' : 'opacity-20'}`}>
+            <ArrowLeft className="h-12 w-12" />
+          </div>
         </div>
 
         {/* Center Display - Word */}
@@ -164,11 +181,19 @@ export default function Session() {
 
         {/* Right Touch Zone - Next */}
         <div 
-          className="flex-[2] flex items-center justify-start pl-4 cursor-pointer select-none"
-          onClick={() => handleTouchZone('right')}
-          style={{ backgroundColor: 'transparent' }}
+          className="flex-[2] flex items-center justify-start pl-4 cursor-pointer select-none touch-manipulation border-l border-white/20 relative"
+          onClick={() => handleZoneInteraction('right')}
+          onTouchEnd={() => handleZoneInteraction('right')}
+          style={{ 
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            WebkitTapHighlightColor: 'transparent'
+          }}
         >
-          <div className="opacity-0 hover:opacity-30 transition-opacity duration-200 p-8">
+          {/* Touch zone label */}
+          <div className="absolute top-4 right-4 text-xs opacity-60">
+            NEXT
+          </div>
+          <div className="opacity-50 hover:opacity-70 active:opacity-90 transition-opacity duration-200 p-8">
             <ArrowRight className="h-12 w-12" />
           </div>
         </div>

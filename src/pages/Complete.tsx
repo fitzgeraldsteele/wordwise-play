@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Clock, BookOpen, Users, RotateCcw, Plus } from 'lucide-react';
 import { useSession } from '../contexts/SessionContext';
 import { wordFamilies, getTotalWordsCount } from '../data/wordFamilies';
+import Footer from '@/components/Footer';
 
 export default function Complete() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function Complete() {
   const familiesCompleted = state.selectedFamilies.length;
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 pb-16">
       <div className="max-w-4xl w-full">
         {/* Success Header */}
         <div className="text-center mb-12">
@@ -167,12 +168,14 @@ export default function Complete() {
         </div>
 
         {/* Encouraging Message */}
-        <div className="text-center mt-8">
+        <div className="text-center mt-8 mb-8">
           <p className="text-white/80 text-lg">
             Keep up the excellent teaching! Your students are building strong reading foundations.
           </p>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }

@@ -9,6 +9,7 @@ import Setup from "./pages/Setup";
 import Session from "./pages/Session";
 import Complete from "./pages/Complete";
 import NotFound from "./pages/NotFound";
+import TouchTest from "./pages/TouchTest";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/setup" element={<Setup />} />
             <Route path="/session" element={<Session />} />
             <Route path="/complete" element={<Complete />} />
+            <Route path="/test" element={<TouchTest />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

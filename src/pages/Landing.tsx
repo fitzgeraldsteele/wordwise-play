@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, Shuffle, Hand } from 'lucide-react';
+import Footer from '@/components/Footer';
 
 export default function Landing() {
   return (
@@ -72,12 +73,14 @@ export default function Landing() {
         </div>
 
         {/* Additional Info */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-16 mb-16">
           <p className="text-white/80 text-lg">
             Perfect for K-2 teachers • Large, projection-friendly text • Accessible design
           </p>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }
