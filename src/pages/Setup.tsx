@@ -61,6 +61,19 @@ export default function Setup() {
               Maximum {maxSelections} families can be selected
             </p>
           )}
+          
+          {/* Begin Session Button - Top */}
+          {selectedFamilies.length > 0 && (
+            <div className="mt-6">
+              <Button
+                onClick={handleBeginSession}
+                className="flex items-center gap-2 bg-session-progress hover:bg-session-progress/90 touch-target"
+              >
+                Begin Session
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Family Grid */}
