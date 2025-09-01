@@ -162,10 +162,9 @@ function sessionReducer(state: SessionState, action: SessionAction): SessionStat
       return initialState;
 
     case 'SET_SKIP_INTROS': {
-      // Persist preference
-      try {
-        localStorage.setItem('wwp:skipIntros', action.skip ? 'true' : 'false');
-      } catch {}
+      } catch (err) {
+        console.error('Failed to persist skipIntros preference:', err);
+      }
       return {
         ...state,
         skipIntros: action.skip
