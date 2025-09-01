@@ -186,10 +186,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     sessionReducer,
     initialState,
     (base) => {
-      let skip = false;
-      try {
-        skip = localStorage.getItem('wwp:skipIntros') === 'true';
-      } catch {}
+      } catch (err) {
+        console.error("Error accessing localStorage for 'wwp:skipIntros':", err);
+      }
       return {
         ...base,
         skipIntros: skip
