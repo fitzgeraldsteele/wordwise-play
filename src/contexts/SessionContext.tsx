@@ -162,6 +162,8 @@ function sessionReducer(state: SessionState, action: SessionAction): SessionStat
       return initialState;
 
     case 'SET_SKIP_INTROS': {
+      try {
+        localStorage.setItem('wwp:skipIntros', JSON.stringify(action.skip));
       } catch (err) {
         console.error('Failed to persist skipIntros preference:', err);
       }
@@ -186,6 +188,10 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     sessionReducer,
     initialState,
     (base) => {
+      let skip = false;
+      try {
+        const stored = localStorage.getItem('wwp:skipIntros');
+        skip = stored ? JSON.parse(stored) : false;
       } catch (err) {
         console.error("Error accessing localStorage for 'wwp:skipIntros':", err);
       }
