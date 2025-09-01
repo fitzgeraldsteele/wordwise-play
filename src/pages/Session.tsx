@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { X, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useSession, useCurrentWord, useSessionProgress } from '../contexts/SessionContext';
 import { wordFamilies } from '../data/wordFamilies';
+import WordFamilyIntro from '@/components/WordFamilyIntro';
 
 export default function Session() {
   const navigate = useNavigate();
@@ -88,14 +89,19 @@ export default function Session() {
   }
 
   const currentFamily = wordFamilies[currentWord.familyId];
-  const canGoPrevious = state.currentFamilyIndex > 0 || state.currentWordIndex > 0;
+  const canGoPrevious = state.showingIntro
+    ? state.currentFamilyIndex > 0
+    : (state.currentFamilyIndex > 0 || state.currentWordIndex > 0);
+  const displayCurrent = state.showingIntro
+    ? Math.min(progress.current + 1, progress.total)
+    : progress.current;
 
   return (
     <div className="min-h-screen bg-session text-session-text relative overflow-hidden">
       {/* HUD Elements */}
       <div className="absolute top-4 left-4 z-10">
         <div className="text-sm opacity-70">
-          Word {progress.current} of {progress.total}
+          Word {displayCurrent} of {progress.total}
         </div>
       </div>
 
@@ -161,21 +167,27 @@ export default function Session() {
           </div>
         </div>
 
-        {/* Center Display - Word */}
+        {/* Center Display - Intro or Word */}
         <div className="flex-1 min-w-0 flex items-center justify-center pointer-events-none">
           <div className="w-full px-4 md:px-8 animate-word-enter">
-            <div className="grid grid-cols-2 items-baseline">
-              <div className="text-right">
-                <span className="text-session-onset text-word-display md:text-word-display font-bold tracking-wider leading-none whitespace-nowrap">
-                  {currentWord.onset}
-                </span>
+            {state.showingIntro ? (
+              <div className="flex items-center justify-center">
+                <WordFamilyIntro rime={currentFamily?.rime || ''} />
               </div>
-              <div className="text-left">
-                <span className="text-session-text text-word-display md:text-word-display font-bold tracking-wider leading-none whitespace-nowrap">
-                  {currentWord.rime}
-                </span>
+            ) : (
+              <div className="grid grid-cols-2 items-baseline">
+                <div className="text-right">
+                  <span className="text-session-onset text-word-display md:text-word-display font-bold tracking-wider leading-none whitespace-nowrap">
+                    {currentWord.onset}
+                  </span>
+                </div>
+                <div className="text-left">
+                  <span className="text-session-text text-word-display md:text-word-display font-bold tracking-wider leading-none whitespace-nowrap">
+                    {currentWord.rime}
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
