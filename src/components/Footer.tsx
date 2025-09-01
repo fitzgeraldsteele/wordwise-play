@@ -15,6 +15,15 @@ export default function Footer() {
             >
               GitHub
             </a>
+             • 
+            <a 
+              href="https://github.com/fitzgeraldsteele/wordwise-play/issues/new/choose" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="ml-1 hover:text-primary transition-colors underline"
+            >
+              Feedback
+            </a>
           </p>
         </div>
       </div>
