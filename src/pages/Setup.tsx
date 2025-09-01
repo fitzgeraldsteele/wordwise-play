@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 export default function Setup() {
   const navigate = useNavigate();
-  const { dispatch } = useSession();
+  const { state, dispatch } = useSession();
   const [selectedFamilies, setSelectedFamilies] = useState<string[]>([]);
   const maxSelections = 4;
 
@@ -144,10 +144,14 @@ export default function Setup() {
             Back
           </Button>
           
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground">
-              Ready to start? Click Begin Session
-            </p>
+          <div className="flex items-center gap-3">
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <Checkbox 
+                checked={state.skipIntros}
+                onCheckedChange={() => dispatch({ type: 'SET_SKIP_INTROS', skip: !state.skipIntros })}
+              />
+              <span className="text-sm text-muted-foreground">Skip intro screens</span>
+            </label>
           </div>
 
           <Button

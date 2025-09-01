@@ -13,6 +13,8 @@ export interface SessionState {
   startTime: Date | null;
   wordsViewed: number;
   isActive: boolean;
+  showingIntro: boolean; // whether to show intro screen for current family
+  skipIntros: boolean;   // preference to skip intros
 }
 
 type SessionAction =
@@ -21,7 +23,8 @@ type SessionAction =
   | { type: 'NEXT_WORD' }
   | { type: 'PREVIOUS_WORD' }
   | { type: 'END_SESSION' }
-  | { type: 'RESET_SESSION' };
+  | { type: 'RESET_SESSION' }
+  | { type: 'SET_SKIP_INTROS'; skip: boolean };
 
 const initialState: SessionState = {
   selectedFamilies: [],
@@ -30,7 +33,9 @@ const initialState: SessionState = {
   sessionWords: [],
   startTime: null,
   wordsViewed: 0,
-  isActive: false
+  isActive: false,
+  showingIntro: false,
+  skipIntros: false
 };
 
 function sessionReducer(state: SessionState, action: SessionAction): SessionState {
@@ -57,12 +62,21 @@ function sessionReducer(state: SessionState, action: SessionAction): SessionStat
         isActive: true,
         currentFamilyIndex: 0,
         currentWordIndex: 0,
-        wordsViewed: 0
+        wordsViewed: 0,
+        showingIntro: state.skipIntros ? false : true
       };
 
     case 'NEXT_WORD': {
       const currentFamily = state.sessionWords[state.currentFamilyIndex];
       if (!currentFamily) return state;
+
+      // If currently showing an intro screen, dismiss it without advancing counters
+      if (state.showingIntro) {
+        return {
+          ...state,
+          showingIntro: false
+        };
+      }
 
       let newWordsViewed = state.wordsViewed + 1;
       
@@ -81,7 +95,8 @@ function sessionReducer(state: SessionState, action: SessionAction): SessionStat
           ...state,
           currentFamilyIndex: state.currentFamilyIndex + 1,
           currentWordIndex: 0,
-          wordsViewed: newWordsViewed
+          wordsViewed: newWordsViewed,
+          showingIntro: state.skipIntros ? false : true
         };
       }
       
@@ -94,26 +109,47 @@ function sessionReducer(state: SessionState, action: SessionAction): SessionStat
     }
 
     case 'PREVIOUS_WORD': {
-      // Check if we can go back in current family
-      if (state.currentWordIndex > 0) {
-        return {
-          ...state,
-          currentWordIndex: state.currentWordIndex - 1
-        };
+      // If currently on intro for this family, go to previous family's last word if possible
+      if (state.showingIntro) {
+        if (state.currentFamilyIndex > 0) {
+          const previousFamilyIndex = state.currentFamilyIndex - 1;
+          const previousFamily = state.sessionWords[previousFamilyIndex];
+          return {
+            ...state,
+            currentFamilyIndex: previousFamilyIndex,
+            currentWordIndex: previousFamily.length - 1,
+            showingIntro: false
+          };
+        }
+        return state;
       }
-      
-      // Check if we can go to previous family
-      if (state.currentFamilyIndex > 0) {
-        const previousFamilyIndex = state.currentFamilyIndex - 1;
-        const previousFamily = state.sessionWords[previousFamilyIndex];
-        return {
-          ...state,
-          currentFamilyIndex: previousFamilyIndex,
-          currentWordIndex: previousFamily.length - 1
-        };
+
+      // If on the first word of the family, go to intro (unless skipping intros)
+      if (state.currentWordIndex === 0) {
+        if (!state.skipIntros) {
+          return {
+            ...state,
+            showingIntro: true
+          };
+        }
+        // else if skipping intros, jump to previous family last word
+        if (state.currentFamilyIndex > 0) {
+          const previousFamilyIndex = state.currentFamilyIndex - 1;
+          const previousFamily = state.sessionWords[previousFamilyIndex];
+          return {
+            ...state,
+            currentFamilyIndex: previousFamilyIndex,
+            currentWordIndex: previousFamily.length - 1
+          };
+        }
+        return state;
       }
-      
-      return state;
+
+      // Otherwise go back within the family
+      return {
+        ...state,
+        currentWordIndex: state.currentWordIndex - 1
+      };
     }
 
     case 'END_SESSION':
@@ -124,6 +160,16 @@ function sessionReducer(state: SessionState, action: SessionAction): SessionStat
 
     case 'RESET_SESSION':
       return initialState;
+
+    case 'SET_SKIP_INTROS': {
+      } catch (err) {
+        console.error('Failed to persist skipIntros preference:', err);
+      }
+      return {
+        ...state,
+        skipIntros: action.skip
+      };
+    }
 
     default:
       return state;
@@ -136,7 +182,19 @@ const SessionContext = createContext<{
 } | null>(null);
 
 export function SessionProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(sessionReducer, initialState);
+  const [state, dispatch] = useReducer(
+    sessionReducer,
+    initialState,
+    (base) => {
+      } catch (err) {
+        console.error("Error accessing localStorage for 'wwp:skipIntros':", err);
+      }
+      return {
+        ...base,
+        skipIntros: skip
+      };
+    }
+  );
 
   return (
     <SessionContext.Provider value={{ state, dispatch }}>
@@ -169,10 +227,12 @@ export function useSessionProgress() {
     0
   );
   
-  const currentPosition = state.sessionWords
+  const previousWordsCount = state.sessionWords
     .slice(0, state.currentFamilyIndex)
-    .reduce((sum, family) => sum + family.length, 0) + 
-    state.currentWordIndex + 1;
+    .reduce((sum, family) => sum + family.length, 0);
+
+  const offset = state.showingIntro ? 0 : (state.currentWordIndex + 1);
+  const currentPosition = previousWordsCount + offset;
     
   return {
     current: Math.min(currentPosition, totalWords),
