@@ -76,6 +76,38 @@ export const wordFamilies: Record<string, WordFamily> = {
       { word: "thin", onset: "th", rime: "in" }
     ]
   },
+  "ink": {
+    id: "ink",
+    displayName: "-ink family",
+    rime: "ink",
+    words: [
+      { word: "ink", onset: "", rime: "ink" },
+      { word: "pink", onset: "p", rime: "ink" },
+      { word: "sink", onset: "s", rime: "ink" },
+      { word: "wink", onset: "w", rime: "ink" },
+      { word: "link", onset: "l", rime: "ink" },
+      { word: "drink", onset: "dr", rime: "ink" },
+      { word: "think", onset: "th", rime: "ink" },
+      { word: "blink", onset: "bl", rime: "ink" },
+      { word: "stink", onset: "st", rime: "ink" }
+    ]
+  },
+  "it": {
+    id: "it",
+    displayName: "-it family",
+    rime: "it",
+    words: [
+      { word: "bit", onset: "b", rime: "it" },
+      { word: "hit", onset: "h", rime: "it" },
+      { word: "sit", onset: "s", rime: "it" },
+      { word: "fit", onset: "f", rime: "it" },
+      { word: "kit", onset: "k", rime: "it" },
+      { word: "pit", onset: "p", rime: "it" },
+      { word: "lit", onset: "l", rime: "it" },
+      { word: "quit", onset: "qu", rime: "it" },
+      { word: "split", onset: "spl", rime: "it" }
+    ]
+  },
   "og": {
     id: "og",
     displayName: "-og family",
@@ -136,6 +168,22 @@ export const wordFamilies: Record<string, WordFamily> = {
       { word: "drop", onset: "dr", rime: "op" },
       { word: "stop", onset: "st", rime: "op" },
       { word: "shop", onset: "sh", rime: "op" }
+    ]
+  },
+  "ot": {
+    id: "ot",
+    displayName: "-ot family",
+    rime: "ot",
+    words: [
+      { word: "hot", onset: "h", rime: "ot" },
+      { word: "pot", onset: "p", rime: "ot" },
+      { word: "lot", onset: "l", rime: "ot" },
+      { word: "got", onset: "g", rime: "ot" },
+      { word: "not", onset: "n", rime: "ot" },
+      { word: "dot", onset: "d", rime: "ot" },
+      { word: "shot", onset: "sh", rime: "ot" },
+      { word: "spot", onset: "sp", rime: "ot" },
+      { word: "plot", onset: "pl", rime: "ot" }
     ]
   },
   "ight": {
