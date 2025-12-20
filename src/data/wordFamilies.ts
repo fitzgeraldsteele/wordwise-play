@@ -233,6 +233,22 @@ export const wordFamilies: Record<string, WordFamily> = {
       { word: "pail", onset: "p", rime: "ail" },
       { word: "trail", onset: "tr", rime: "ail" }
     ]
+  },
+  "ed": {
+    id: "ed",
+    displayName: "-ed family",
+    rime: "ed",
+    words: [
+      { word: "bed", onset: "b", rime: "ed" },
+      { word: "red", onset: "r", rime: "ed" },
+      { word: "fed", onset: "f", rime: "ed" },
+      { word: "led", onset: "l", rime: "ed" },
+      { word: "wed", onset: "w", rime: "ed" },
+      { word: "shed", onset: "sh", rime: "ed" },
+      { word: "sled", onset: "sl", rime: "ed" },
+      { word: "fled", onset: "fl", rime: "ed" },
+      { word: "sped", onset: "sp", rime: "ed" }
+    ]
   }
 };
 
